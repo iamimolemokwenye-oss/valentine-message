@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our First Valentine 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin:0; padding:0; overflow:hidden;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg,#ffc1e3,#ffb6c1,#e0aaff);
+      color: #fff; text-align:center;
+    }
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 70px; margin-top: 40px;
+      text-shadow: 2px 2px 12px #ff66b2;
+    }
+
+    /* Photo carousel */
+    #carousel {
+      margin-top:30px;
+      display:flex; overflow-x:auto; scroll-behavior:smooth;
+      padding-bottom:20px;
+    }
+    #carousel img {
+      width:250px; height:250px;
+      border-radius:50%; border:5px solid #ff66b2;
+      margin: 0 10px; object-fit:cover;
+      box-shadow:0 0 40px #ff66b2;
+      flex-shrink:0;
+    }
+
+    /* Message box */
+    #message {
+      display:none;
+      max-width:90%;
+      margin:40px auto;
+      font-size:30px; line-height:2;
+      background: rgba(255,255,255,0.15);
+      padding:35px; border-radius:30px;
+      backdrop-filter:blur(6px);
+      animation: fadeIn 2s forwards;
+    }
+
+    button {
+      margin-top:20px;
+      background-color:#ff3399;
+      color:white;
+      border:none;
+      padding:20px 50px;
+      font-size:26px;
+      cursor:pointer;
+      border-radius:20px;
+      text-shadow:1px 1px 4px #ff66b2;
+      box-shadow:0 0 25px #ff66b2;
+    }
+    button:hover {
+      background-color:#ff66b2;
+      transform: scale(1.08);
+      transition: 0.3s;
+    }
+
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+
+    /* Floating hearts */
+    .heart {
+      position:absolute; width:25px; height:25px;
+      background:url('https://i.ibb.co/XS0Jhzs/heart.png') no-repeat center/contain;
+      pointer-events:none;
+      animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+      0% {transform: translateY(100vh) scale(0.5); opacity:0;}
+      10% {opacity:1;}
+      100% {transform: translateY(-50vh) scale(1); opacity:0;}
+    }
+
+    /* Sparkle effect on key words */
+    .sparkle {
+      color:#fff;
+      text-shadow:0 0 6px #ff66b2,0 0 12px #ff3399,0 0 18px #ff66b2;
+      cursor:pointer;
+      transition: all 0.4s ease-in-out;
+    }
+    .sparkle:hover {
+      text-shadow:0 0 18px #fff,0 0 28px #ff3399,0 0 38px #ff66b2;
+      transform: scale(1.15);
+    }
+
+    /* Confetti */
+    .confetti {
+      position:absolute;
+      width:12px; height:12px;
+      opacity:0.9; transform: rotate(0deg);
+      animation: confettiFall linear forwards;
+    }
+    @keyframes confettiFall {
+      0% {top:-10px; transform: rotate(0deg);}
+      100% {top:100vh; transform: rotate(360deg);}
+    }
+  </style>
+</head>
+<body>
+  <h1>Happy First Valentine 💖</h1>
+
+  <div id="carousel">
+    <img src="https://i.postimg.cc/kDDcTG6w/ourphoto2.jpg" alt="Photo 1">
+    <img src="https://i.postimg.cc/vDjvkyfv/ourphoto3.jpg" alt="Photo 2">
+    <img src="https://i.postimg.cc/MX4YNwVD/ourphoto4.jpg" alt="Photo 3">
+  </div>
+
+  <button onclick="showMessage()">Reveal 💌</button>
+
+  <div id="message">
+    <p>Dear <span class="sparkle">Blessing Chiamaka Onyemuwa</span>,</p>
+    <p>This is our <span class="sparkle">first Valentine’s Day</span> together, and I feel incredibly lucky to have you. From the moment we met, my life has been filled with joy, laughter, and unforgettable memories. Your smile lights up my world, and your love warms my heart in ways I never knew were possible.</p>
+    <p>Every laugh, every hug, every quiet moment we’ve shared has been a treasure. You’ve shown me what true love really is—patient, kind, and magical. I am grateful for every day, every second, that I get to call you mine. My heart beats for you, now and forever.</p>
+    <p>On this special day, I promise to always stand by your side, to make you laugh when you’re down, to love you more deeply every single day, and to make memories that we’ll cherish forever. You are my everything, my heart, my future, and my greatest blessing.</p>
+    <p>Forever yours, <br><span class="sparkle">Mokwenye 💖</span></p>
+  </div>
+
+  <audio id="bgMusic" autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function showMessage() {
+      document.getElementById('message').style.display = 'block';
+      createConfetti(120);
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className='heart';
+      heart.style.left=Math.random()*window.innerWidth+'px';
+      heart.style.animationDuration=4+Math.random()*4+'s';
+      document.body.appendChild(heart);
+      setTimeout(()=>heart.remove(),8000);
+    }
+    setInterval(createHeart,400);
+
+    function createConfetti(count) {
+      for(let i=0;i<count;i++){
+        const conf=document.createElement('div');
+        conf.className='confetti';
+        conf.style.left=Math.random()*window.innerWidth+'px';
+        conf.style.background=['#ff66b2','#ff3399','#ffe6f0','#ffb6c1'][Math.floor(Math.random()*4)];
+        conf.style.width=Math.random()*10+5+'px';
+        conf.style.height=conf.style.width;
+        conf.style.animationDuration=3+Math.random()*3+'s';
+        document.body.appendChild(conf);
+        setTimeout(()=>conf.remove(),6000);
+      }
+    }
+  </script>
+</body>
+</html>
